@@ -10,14 +10,14 @@ import game.Type;
  * @author Austin
  *
  */
-public class Pawn extends Piece{
+public class Knight extends Piece {
 	
 	Type mType;
-	
-	public Pawn(int x, int y, Player player)
+
+	public Knight(int x, int y, Player player)
 	{
 		super(x, y, player);
-		mType = Type.PAWN;
+		mType = Type.KNIGHT;
 	}
 
 	@Override
@@ -26,16 +26,15 @@ public class Pawn extends Piece{
 		return false;
 	}
 
+	@Override
 	public int[][] drawPath(int startX, int startY, int finalX, int finalY) {
-		int distance = 0;
-		int [][] path = new int[2][distance];
-		
-		return path;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
 	public Type getType() {
 		// TODO Auto-generated method stub
-		return Type.PAWN;
+		return Type.KNIGHT;
 	}
-
 }
