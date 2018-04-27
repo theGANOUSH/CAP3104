@@ -182,9 +182,19 @@ public class GameWindow extends JFrame {
 					button.setIcon(new ImageIcon(whiteKing));
 	    		}
 	    		
-	    		
-	    		
-	    		
+	    		button.setBorderPainted(true);
+	    		if(row % 2 == 0 && col % 2 == 0)
+	    		{
+	    			button.setBackground(java.awt.Color.DARK_GRAY);
+	    		}
+	    		else if(row % 2 == 1 && col % 2 == 1)
+	    		{
+	    			button.setBackground(java.awt.Color.DARK_GRAY);
+	    		}
+	    		else
+	    		{
+	    			button.setBackground(java.awt.Color.WHITE);
+	    		}
 	    		
 	    		pane.add(button);
 	    	}
