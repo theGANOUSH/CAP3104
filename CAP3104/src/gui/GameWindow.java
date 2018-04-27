@@ -60,6 +60,132 @@ public class GameWindow extends JFrame {
 					}
 					button.setIcon(new ImageIcon(blackPawn));
 				}
+	    		if(row == 6)
+	    		{
+	    			Image whitePawn = null;
+	    			try {
+						whitePawn = ImageIO.read(getClass().getResource("images/Chess_tile_pl.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(whitePawn));
+	    		}
+	    		if(row == 0 && (col == 0 || col == 7))
+	    		{
+	    			Image blackRook = null;
+	    			try {
+						blackRook = ImageIO.read(getClass().getResource("images/Chess_tile_rd.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(blackRook));
+	    		}
+	    		if(row == 7 && (col == 0 || col == 7))
+	    		{
+	    			Image whiteRook = null;
+	    			try {
+						whiteRook = ImageIO.read(getClass().getResource("images/Chess_tile_rl.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(whiteRook));
+	    		}
+	    		if(row == 0 && (col == 1 || col == 6))
+	    		{
+	    			Image blackKnight = null;
+	    			try {
+						blackKnight = ImageIO.read(getClass().getResource("images/Chess_tile_nd.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(blackKnight));
+	    		}
+	    		if(row == 7 && (col == 1 || col == 6))
+	    		{
+	    			Image whiteKnight = null;
+	    			try {
+						whiteKnight = ImageIO.read(getClass().getResource("images/Chess_tile_nl.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(whiteKnight));
+	    		}
+	    		if(row == 0 && (col == 2 || col == 5))
+	    		{
+	    			Image blackBishop = null;
+	    			try {
+						blackBishop = ImageIO.read(getClass().getResource("images/Chess_tile_bd.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(blackBishop));
+	    		}
+	    		if(row == 7 && (col == 2 || col == 5))
+	    		{
+	    			Image whiteBishop = null;
+	    			try {
+						whiteBishop = ImageIO.read(getClass().getResource("images/Chess_tile_bl.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(whiteBishop));
+	    		}
+	    		if(row == 0 && col == 3)
+	    		{
+	    			Image blackQueen = null;
+	    			try {
+						blackQueen = ImageIO.read(getClass().getResource("images/Chess_tile_qd.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(blackQueen));
+	    		}
+	    		if(row == 7 && col == 3)
+	    		{
+	    			Image whiteQueen = null;
+	    			try {
+						whiteQueen = ImageIO.read(getClass().getResource("images/Chess_tile_ql.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(whiteQueen));
+	    		}
+	    		if(row == 0 && col == 4)
+	    		{
+	    			Image blackKing = null;
+	    			try {
+						blackKing = ImageIO.read(getClass().getResource("images/Chess_tile_kd.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(blackKing));
+	    		}
+	    		if(row == 7 && col == 4)
+	    		{
+	    			Image whiteKing = null;
+	    			try {
+						whiteKing = ImageIO.read(getClass().getResource("images/Chess_tile_kl.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.err.println("Error: " + e.getMessage());
+					}
+					button.setIcon(new ImageIcon(whiteKing));
+	    		}
+	    		
+	    		
+	    		
+	    		
+	    		
 	    		pane.add(button);
 	    	}
 	      
