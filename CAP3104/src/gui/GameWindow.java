@@ -9,12 +9,15 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+
+import game.PlayerHandler;
+
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 
 public class GameWindow extends JFrame {
-
-
+	
 	private static final long serialVersionUID = 7058806678771843480L;
 
 	/**
@@ -196,6 +199,9 @@ public class GameWindow extends JFrame {
 	    			button.setBackground(java.awt.Color.WHITE);
 	    		}
 	    		
+	    		button.setPreferredSize(new Dimension(100, 100));
+	    		PlayerHandler action = new PlayerHandler();
+	    		button.addActionListener(action);
 	    		pane.add(button);
 	    	}
 	      
