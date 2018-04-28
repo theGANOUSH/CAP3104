@@ -8,9 +8,12 @@ package game;
  *
  */
 public class Game {
+	
 	public Board chessBoard;
 	public Player playerB, playerW;
+	
 	public int round = 0; //even= playerW, odd=playerB
+	
 	final static int boardHeight = 8;
 	final static int boardWidth = 8;
 	

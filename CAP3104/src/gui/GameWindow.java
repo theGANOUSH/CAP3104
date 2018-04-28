@@ -1,8 +1,14 @@
 package gui;
 
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -10,26 +16,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import game.PlayerHandler;
-
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import game.Game;
+import pieces.Piece;
 
 public class GameWindow extends JFrame {
-	
+	public Game newGame;
 	private static final long serialVersionUID = 7058806678771843480L;
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					GameWindow frame = new GameWindow();
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.pack();
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,6 +51,7 @@ public class GameWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    Container pane = getContentPane();
 	    pane.setLayout(new GridLayout(8, 8));
+	    newGame = new Game();
 	    for (int row = 0; row < 8; row++) 
 	    {
 	    	for(int col = 0; col < 8; col++)
@@ -207,4 +212,23 @@ public class GameWindow extends JFrame {
 	      
 	    }
 	}
+	
+	public class PlayerHandler implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			JButton button = (JButton) arg0.getSource();
+			
+			Point rv = new Point();
+			int xLocation = button.getLocation(rv).x / 100;
+			int yLocation = button.getLocation(rv).y / 100;
+			//System.out.println(xLocation + ", " + yLocation);
+			Piece selected = newGame.chessBoard.arrayBoard[xLocation][yLocation];
+			System.out.println(selected.getType());
+			
+		}
+
+	}
+
 }
