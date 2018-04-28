@@ -12,16 +12,24 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import game.Game;
+import game.Player;
+import game.Team;
 import pieces.Piece;
 
 public class GameWindow extends JFrame {
-	public Game newGame;
+	Game newGame;
+	Player currentPlayer = new Player(Team.WHITE);
+	Piece selectedPiece = null;
+	JButton selectedButton = null;
+	
 	private static final long serialVersionUID = 7058806678771843480L;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -225,7 +233,20 @@ public class GameWindow extends JFrame {
 			int yLocation = button.getLocation(rv).y / 100;
 			//System.out.println(xLocation + ", " + yLocation);
 			Piece selected = newGame.chessBoard.arrayBoard[xLocation][yLocation];
-			System.out.println(selected.getType());
+			if(selected !=null && selectedPiece == null)
+			{
+				selectedPiece = newGame.chessBoard.arrayBoard[xLocation][yLocation];
+				selectedButton = button;
+				System.out.println(selectedPiece.getType());
+			}
+			else if(selectedPiece != null && selected == null)
+			{
+				//need to add chessboard update
+				Icon img = selectedButton.getIcon();
+				button.setIcon(img);
+				selectedButton.setIcon(null);
+				selectedPiece = null;
+			}
 			
 		}
 
