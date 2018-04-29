@@ -3,6 +3,8 @@
  */
 package game;
 
+import java.util.Vector;
+
 import pieces.Bishop;
 import pieces.King;
 import pieces.Knight;
@@ -19,8 +21,8 @@ public class Board {
 	int mHeight, mWidth;
 	public Piece[][] arrayBoard;
 	public Game mGame;
-	//public Vector<Piece> whitePieces = new Vector<Piece>(16);
-	//public Vector<Piece> blackPieces = new Vector<Piece>(16);
+	public Vector<Piece> whitePieces = new Vector<Piece>(16);
+	public Vector<Piece> blackPieces = new Vector<Piece>(16);
 
 	public Board(int boardheight, int boardwidth, Game game) {
 		// TODO Auto-generated constructor stub
@@ -84,13 +86,13 @@ public class Board {
 		board[3][7] = queenW;
 		board[4][7] = kingW;
 		
-//		for(int i = 0; i < 8; i++)
-//		{
-//			whitePieces.add(this.arrayBoard[6][i]);
-//			whitePieces.add(this.arrayBoard[7][i]);
-//			blackPieces.add(this.arrayBoard[0][i]);
-//			blackPieces.add(this.arrayBoard[1][i]);
-//		}
+		for(int i = 0; i < 8; i++)
+		{
+			whitePieces.add(this.arrayBoard[6][i]);
+			whitePieces.add(this.arrayBoard[7][i]);
+			blackPieces.add(this.arrayBoard[0][i]);
+			blackPieces.add(this.arrayBoard[1][i]);
+		}
 		System.out.println("board Generated");
 	}
 

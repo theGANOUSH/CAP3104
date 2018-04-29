@@ -12,19 +12,30 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import game.Game;
 import game.Player;
+import game.Team;
 import pieces.Piece;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GameWindow extends JFrame {
-	public Game newGame;
-	public Player currentPlayer;
+	Game newGame;
+	Player currentPlayer = new Player(Team.WHITE);
+	Piece selectedPiece = null;
+	JButton selectedButton = null;
+	
 	private static final long serialVersionUID = 7058806678771843480L;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -54,6 +65,29 @@ public class GameWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    Container pane = getContentPane();
 	    pane.setLayout(new GridLayout(8, 8));
+	    
+	    JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmNewGame = new JMenuItem("New Game");
+		mntmNewGame.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				System.out.println("New Game Started");
+			}
+		});
+		mnFile.add(mntmNewGame);
+		
+		JMenuItem mntmForfiet = new JMenuItem("Forfiet");
+		mntmForfiet.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println("Game Has been Forfieted");
+			}
+		});
+		mnFile.add(mntmForfiet);
 	    
 	    for (int row = 0; row < 8; row++) 
 	    {
@@ -212,13 +246,11 @@ public class GameWindow extends JFrame {
 	    		button.addActionListener(action);
 	    		pane.add(button);
 	    	}
+	      
 	    }
 	    
 	    newGame = new Game();
 	    currentPlayer = newGame.playerW;
-	    
-	    JOptionPane.showMessageDialog(null, "It is Team - " + currentPlayer.mTeam + "'s turn.", "Starting New Game", JOptionPane.INFORMATION_MESSAGE);
-	    
 	}
 	
 	public class PlayerHandler implements ActionListener {
@@ -234,10 +266,28 @@ public class GameWindow extends JFrame {
 			//System.out.println(xLocation + ", " + yLocation);
 			Piece selected = newGame.chessBoard.arrayBoard[xLocation][yLocation];
 			
-			if(selected != null)
+			if(selected != null && selected.mPlayer == currentPlayer && selectedPiece == null)
 			{
 				System.out.println(selected.getType() + ", " + selected.mPlayer);
+				
+				selectedButton = button;
+				selectedPiece = newGame.chessBoard.arrayBoard[xLocation][yLocation];
+				
 			}
+			else if(selected != null && selectedPiece == null && selected.mPlayer != currentPlayer)
+			{
+				JOptionPane.showMessageDialog(null, "That is not your piece!" , "Illegal Move", JOptionPane.WARNING_MESSAGE);
+			}
+			else if(selectedPiece != null && selected == null)
+			{
+				Icon img = selectedButton.getIcon();
+				button.setIcon(img);
+				selectedButton.setIcon(null);
+				selectedPiece = null;
+			}
+			
+			
+			
 		}
 
 	}
