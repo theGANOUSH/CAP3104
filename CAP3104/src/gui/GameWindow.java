@@ -29,10 +29,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class GameWindow extends JFrame {
-	Game newGame;
+	public Game newGame;
 	Player currentPlayer = new Player(Team.WHITE);
 	Piece selectedPiece = null;
 	JButton selectedButton = null;
+	
+	JFrame gameOptionsPage;
 	
 	private static final long serialVersionUID = 7058806678771843480L;
 	
@@ -76,6 +78,8 @@ public class GameWindow extends JFrame {
 		mntmNewGame.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				System.out.println("New Game Started");
+				gameOptionsPage = new Menu();
+				gameOptionsPage.setVisible(true);
 			}
 		});
 		mnFile.add(mntmNewGame);
@@ -84,9 +88,17 @@ public class GameWindow extends JFrame {
 		mntmForfiet.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				System.out.println("Game Has been Forfieted");
+				//System.out.println("Game Has been Forfieted");
+				int ans = JOptionPane.showConfirmDialog(null, "You are about to forfiet the game.\nAre you sure?", "Forfiet", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if(ans == 0)
+				{
+					JOptionPane.showMessageDialog(null, "You have forfited the game.", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+				System.out.println(ans);
 			}
 		});
+		
 		mnFile.add(mntmForfiet);
 	    
 	    for (int row = 0; row < 8; row++) 
@@ -244,9 +256,9 @@ public class GameWindow extends JFrame {
 	    		button.setPreferredSize(new Dimension(100, 100));
 	    		PlayerHandler action = new PlayerHandler();
 	    		button.addActionListener(action);
+	    		//button.setEnabled(false);
 	    		pane.add(button);
 	    	}
-	      
 	    }
 	    
 	    newGame = new Game();
@@ -255,7 +267,6 @@ public class GameWindow extends JFrame {
 	
 	public class PlayerHandler implements ActionListener {
 
-		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			JButton button = (JButton) arg0.getSource();
@@ -266,6 +277,21 @@ public class GameWindow extends JFrame {
 			//System.out.println(xLocation + ", " + yLocation);
 			Piece selected = newGame.chessBoard.arrayBoard[xLocation][yLocation];
 			
+			//no piece was loaded
+			if(selected !=null)
+			{
+				if(selected.mPlayer != currentPlayer)
+				{
+					if(selected.getType() == game.Type.KING)
+					{
+						System.out.println("King Captured");
+						System.out.println(newGame.round);
+						int ans = JOptionPane.showConfirmDialog(null, "Checkmate! " + currentPlayer.mTeam +" has Won\nWould you like a rematch?","Game Over", JOptionPane.YES_NO_OPTION);
+						System.out.println(ans);	
+					}
+				}
+			}
+			
 			if(selected != null && selected.mPlayer == currentPlayer && selectedPiece == null)
 			{
 				System.out.println(selected.getType() + ", " + selected.mPlayer);
@@ -274,22 +300,40 @@ public class GameWindow extends JFrame {
 				selectedPiece = newGame.chessBoard.arrayBoard[xLocation][yLocation];
 				
 			}
-			else if(selected != null && selectedPiece == null && selected.mPlayer != currentPlayer)
-			{
-				JOptionPane.showMessageDialog(null, "That is not your piece!" , "Illegal Move", JOptionPane.WARNING_MESSAGE);
-			}
 			else if(selectedPiece != null && selected == null)
 			{
+				
 				Icon img = selectedButton.getIcon();
 				button.setIcon(img);
 				selectedButton.setIcon(null);
+				
+				newGame.chessBoard.movePiece(selectedPiece, xLocation, yLocation);
+				newGame.round++;
+				
+				if(currentPlayer == newGame.playerW)
+				{
+					currentPlayer = newGame.playerB;
+				}
+				else
+				{
+					currentPlayer = newGame.playerW;
+				}
+				
 				selectedPiece = null;
 			}
-			
-			
+			//a piece was loaded and the selected piece is not current player.
+			else if(selected != null && selectedPiece != null && selected.mPlayer != currentPlayer)
+			{
+				if(selected.getType() == game.Type.KING)
+				{
+					
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "That is not your piece!" , "Illegal Move", JOptionPane.WARNING_MESSAGE);
+				}
+			}
 			
 		}
-
 	}
-
 }

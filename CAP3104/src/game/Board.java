@@ -32,6 +32,17 @@ public class Board {
 		mWidth = boardwidth;
 		
 	}
+	public void movePiece(Piece piece, int xFinal, int yFinal)
+	{
+		int orignalXLocation = piece.mX;
+		int orginalYLocation = piece.mY;
+		
+		piece.mX = xFinal;
+		piece.mY = yFinal;
+		
+		arrayBoard[xFinal][yFinal] = piece;
+		arrayBoard[orignalXLocation][orginalYLocation] = null;
+	}
 
 	public void setPieces() {
 		// TODO Auto-generated method stub

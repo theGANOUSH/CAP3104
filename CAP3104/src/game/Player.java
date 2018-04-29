@@ -6,7 +6,7 @@ import pieces.Piece;
 
 public class Player {
 
-	Team mTeam;
+	public Team mTeam;
 	public Game playerGame;
 	
 	public Player(Team color) {
