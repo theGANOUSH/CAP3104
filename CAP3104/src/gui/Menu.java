@@ -178,7 +178,7 @@ System.exit(0);        // TODO add your handling code here:
     }                                          
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-    	
+    	this.dispose();
     }                                           
 
     private void DifficultySelectActionPerformed(java.awt.event.ActionEvent evt) {                                                 
